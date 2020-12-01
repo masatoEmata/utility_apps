@@ -71,7 +71,7 @@
 
             var generate_button = document.querySelector("button#generate");
             generate_button.onclick = function () {
-                alert("生成、および、ダウンロードしました);
+                alert("生成、および、ダウンロードしました");
                 let blob = new Blob([generate_pixel_tag()], { type: "text/plan" });
                 let link = document.createElement('a');
                 link.href = URL.createObjectURL(blob);
