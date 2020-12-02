@@ -1,15 +1,35 @@
-<!DOCTYPE html>
 <html>
 
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Facebook Pixel - イベントタグ（動的広告タグ）ジェネレーター</title>
+    <title>Facebook Pixel イベントタグ（動的広告タグ）ジェネレーター</title>
     <style>
-        .invisible{
-            display: none;
-        }
-    </style>
+    .invisible, .invisible-static{
+        display: none;
+    }
+    .blank{
+        margin-left: 10px;
+    }
+    button#generate {
+        margin: 0 auto;
+        font-size: 14px;
+        background-color: #3b5998;
+        color: white;
+        padding: 12px 20px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+    title, h1, h2, h3 {
+        color: #3b5998;
+    }
+    fieldset {
+        background-color: #3b59981a;
+        border-width: 0px;
+        color: #3b5998;
+        margin-bottom: 20px;
+    }</style>
     <!-- Google Tag Manager -->
     <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
     new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
@@ -17,75 +37,74 @@
     'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
     })(window,document,'script','dataLayer','GTM-KH546HW');</script>
     <!-- End Google Tag Manager -->
-</head>
+</head><body>
+    <header>
+        <h1>Facebook Pixel - イベントタグ（動的広告タグ）ジェネレーター</h1>
+    </header>
+    <main>
+        <h2>生成フォーム</h2>
+        <form>
+            <fieldset>
+                <legend>標準イベント名を選んでください</legend>
+                <input type="radio" id="event_name1" name="event_name" value="ViewContent"><label for="event_name1">ViewContent</label><br>
+                <input type="radio" id="event_name2" name="event_name" value="AddToCart"><label for="event_name2">AddToCart</label><br>
+                <input type="radio" id="event_name3" name="event_name" value="Purchase"><label for="event_name3">Purchase</label><br>
+            </fieldset>
+            <fieldset>
+                <legend>送信する商品IDの粒度を選んでください</legend>
+                <input type="radio" id="content_type1" name="content_type" value="" class="properties"><label for="content_type1">商品IDを送信しない</label><br>
+                <input type="radio" id="content_type2" name="content_type" value="product" class="properties"><label for="content_type2">SKU</label><br>
+                <input type="radio" id="content_type3" name="content_type" value="product_group" class="properties"><label for="content_type3">グループID</label><br>
+            </fieldset>
+            <fieldset>
+                <legend>商品数量も送信するか選んでください</legend>
+                <input type="radio" id="quantity1" name="quantity" value="" class="property_map"><label for="quantity1">IDも数量も送信しない</label><br>
+                <input type="radio" id="quantity2" name="quantity" value="content_ids:【変数 配列型 ex.['1234567891234',...]】" class="property_map"><label for="quantity2">数量を送信しない</label><br>
+                <input type="radio" id="quantity3" name="quantity" value="contents:【変数 JSONオブジェクト配列型 ex.[{'id':'1234567891234','quantity':3},...]】" class="property_map"><label for="quantity3">数量を送信する</label><br>
+            </fieldset>
+            <fieldset>
+                <legend>ページ/商品名も送信するか選んでください</legend>
+                <input type="radio" id="content_name1" name="content_name" value="" class="properties"><label for="content_name1">送信しない</label><br>
+                <input type="radio" id="content_name2" name="content_name" value="【変数 テキスト型 ex.トレンチコートXXX】" class="properties"><label for="content_name2">送信する</label><br>
+            </fieldset>
+            <fieldset>
+                <legend>金額を送信するか選んでください（「Purchase」イベントは必須）</legend>
+                <input type="radio" id="value1" name="value" value="" class="properties"><label for="value1">送信しない</label><br>
+                <input type="radio" id="value2" name="value" value="【変数 数値型 ex.128000】" class="properties"><label for="value2">送信する</label><br>
+            </fieldset>
+            <fieldset>
+                <legend>通貨コードを送信するか選んでください（「Purchase」イベントは必須）</legend>
+                <input type="radio" id="currency1" name="currency" value="" class="properties"><label for="currency1">送信しない</label><br>
+                <input type="radio" id="currency2" name="currency" value="JPY" class="properties"><label for="currency2">JPY</label><br>
+                <input type="radio" id="currency3" name="currency" value="USD" class="properties"><label for="currency3">USD</label><br>
+            </fieldset>
+            <fieldset>
+                <legend>複数のピクセルタグ設置に対応するか選んでください</legend>
+                <input type="radio" id="trackSingle1" name="trackSingle" value=""><label for="trackSingle1">対応しない</label><br>
+                <input type="radio" id="trackSingle2" name="trackSingle" value="trackSingle"><label for="trackSingle2">対応する</label><br>
+            </fieldset>
+            <fieldset class="invisible">
+                <legend>上記「対応する」場合、Facebook Pixel ID を入力してください</legend>
+                <input type="text" id="pixel_id1" name="pixel_id">
+            </fieldset>
+            <button id="generate" type="button">Facebook Pixel Tag を生成する</button>
+        </form>
+        <p>利用時は念のためセルフチェックをお願いします。</p><hr>
 
-<body>
-    <h1>Facebook Pixel - イベントタグ（動的広告タグ）ジェネレーター</h1>
-    <form>
-        <fieldset>
-            <legend>標準イベント名を選んでください</legend>
-            <input type="radio" id="event_name1" name="event_name" value="ViewContent" /><label
-                for="event_name1">ViewContent</label><br>
-            <input type="radio" id="event_name2" name="event_name" value="AddToCart" /><label
-                for="event_name2">AddToCart</label><br>
-            <input type="radio" id="event_name3" name="event_name" value="Purchase" /><label
-                for="event_name3">Purchase</label><br>
-        </fieldset>
-        <fieldset>
-            <legend>送信する商品IDの粒度を選んでください</legend>
-            <input type="radio" id="content_type1" name="content_type" value="" class="properties" /><label
-                for="content_type1">商品IDを送信しない</label><br>
-            <input type="radio" id="content_type2" name="content_type" value="product" class="properties" /><label
-                for="content_type2">SKU</label><br>
-            <input type="radio" id="content_type3" name="content_type" value="product_group" class="properties" /><label
-                for="content_type3">グループID</label><br>
-        </fieldset>
-        <fieldset>
-            <legend>商品数量も送信するか選んでください</legend>
-            <input type="radio" id="quantity1" name="quantity" value="" class="property_map" /><label
-                for="quantity1">IDも数量も送信しない</label><br>
-            <input type="radio" id="quantity2" name="quantity" value="content_ids:【変数 配列型 ex.['1234567891234',...]】"
-                class="property_map" /><label for="quantity2">数量を送信しない</label><br>
-            <input type="radio" id="quantity3" name="quantity" value="contents:【変数 JSONオブジェクト配列型 ex.[{'id':'1234567891234','quantity':3},...]】"
-                class="property_map" /><label for="quantity3">数量を送信する</label><br>
-        </fieldset>
-        <fieldset>
-            <legend>ページ/商品名も送信するか選んでください</legend>
-            <input type="radio" id="content_name1" name="content_name" value="" class="properties" /><label
-                for="content_name1">送信しない</label><br>
-            <input type="radio" id="content_name2" name="content_name" value="【変数 テキスト型 ex.トレンチコートXXX】"
-                class="properties" /><label for="content_name2">送信する</label><br>
-        </fieldset>
-        <fieldset>
-            <legend>金額を送信するか選んでください（「Purchase」イベントは必須）</legend>
-            <input type="radio" id="value1" name="value" value="" class="properties" /><label
-                for="value1">送信しない</label><br>
-            <input type="radio" id="value2" name="value" value="【変数 数値型 ex.128000】" class="properties" /><label
-                for="value2">送信する</label><br>
-        </fieldset>
-        <fieldset>
-            <legend>通貨コードを送信するか選んでください（「Purchase」イベントは必須）</legend>
-            <input type="radio" id="currency1" name="currency" value="" class="properties" /><label
-                for="currency1">送信しない</label><br>
-            <input type="radio" id="currency2" name="currency" value="JPY" class="properties" /><label
-                for="currency2">JPY</label><br>
-            <input type="radio" id="currency3" name="currency" value="USD" class="properties" /><label
-                for="currency3">USD</label><br>
-        </fieldset>
-        <fieldset>
-            <legend>複数のピクセルタグ設置に対応するか選んでください</legend>
-            <input type="radio" id="trackSingle1" name="trackSingle" value="" /><label
-                for="trackSingle1">対応しない</label><br>
-            <input type="radio" id="trackSingle2" name="trackSingle" value="trackSingle" /><label
-                for="trackSingle2">対応する</label><br>
-        </fieldset>
-        <fieldset class="invisible">
-            <legend>上記「対応する」場合、Facebook Pixel ID を入力してください</legend>
-            <input type="text" id="pixel_id1" name="pixel_id" />
-        </fieldset>
-        <button id="generate" type="button">Facebook Pixel Tag を生成する</button>
-    </form>
-</body>
+        <h2>関連情報</h2>
+        <ul>
+            <li><a href="https://www.facebook.com/business/help/120325381656392?id=725943027795860" target="_blank">(運用者向け)カタログのデータフィードのフィールドと仕様</a></li>
+            <li><a href="https://developers.facebook.com/docs/facebook-pixel/reference/" target="_blank">(Developer向け)Pixel Tag 標準イベント リファレンス</a></li>
+            <li><a href="https://www.principle-c.com/column/engineer/recommendation-of-data-feed-usages-contribute-to-business-growth/">(広告初心者向け)ビジネス成長に寄与するデータフィード活用のすすめ</a></li>
+        </ul>
+    
+    </main>
+    <footer>
+        <h2>Developer</h2>
+        <p>masato.emata</p><p class="invisible-static">江俣 真人 えまた まさと</p><p></p>
+        <p><a href="https://twitter.com/masatoemata" target="_blank">Twitter</a><span class="blank"></span><a href="https://github.com/masatoEmata" target="_blank">github</a></p>
+    </footer>
+
 
 <script>
     (function () {
@@ -114,12 +133,15 @@
             //生成ボタンクリックによりタグファイルをダウンロード
             var generate_button = document.querySelector("button#generate");
             generate_button.onclick = function () {
-                alert("生成、および、ダウンロードしました");
-                let blob = new Blob([generate_pixel_tag()], { type: "text/plan" });
-                let link = document.createElement('a');
-                link.href = URL.createObjectURL(blob);
-                link.download = 'Facebook Event Tag.txt';
-                link.click();
+                const pixel_tag = generate_pixel_tag();
+                if(pixel_tag){
+                    alert("生成、および、ダウンロードしました");
+                    let blob = new Blob([pixel_tag], { type: "text/plan" });
+                    let link = document.createElement('a');
+                    link.href = URL.createObjectURL(blob);
+                    link.download = 'Facebook Event Tag.txt';
+                    link.click();
+                }
             }
 
             //入力値をもとにピクセルタグを生成
@@ -150,4 +172,5 @@
     }());
 </script>
 
-</html>
+
+</body></html>
